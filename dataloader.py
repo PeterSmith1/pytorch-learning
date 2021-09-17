@@ -12,14 +12,16 @@ print(img.shape)
 print(target)
 
 writer = SummaryWriter("dataloader")
-step = 0
+
 #drop_last设置为False,不舍弃不足batch_size一次性规定取的
 # for data in test_loader:
 #     imgs,targets = data
 #     writer.add_images("test_imgs",imgs,step)
 #     step = step + 1
-for data in test_loader:
-    imgs, targets = data
-    writer.add_images("drop_last_imgs", imgs, step)
-    step = step + 1
+for epoch in range(2):
+    step = 0
+    for data in test_loader:
+        imgs, targets = data
+        writer.add_images("Epoch:{}".format(epoch), imgs, step)#shuffle设置为True，两次取数据集不重复
+        step = step + 1
 writer.close()
